@@ -105,6 +105,6 @@ public class ABCCPerfil {
        return "ConsultarIH?faces-redirect=true";
     }
     public boolean verificarSesion(){
-        return mBUsuario.getNombreusuario() != null;
+        return mBUsuario.getNombre() != null;
     }
 }

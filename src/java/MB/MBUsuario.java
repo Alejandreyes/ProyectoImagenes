@@ -70,26 +70,30 @@ public class MBUsuario {
     }
     
       public String valida() {
-        UsuarioDao user = new UsuarioDao();
+          try{
+              UsuarioDao user = new UsuarioDao();
         //List<Usuario> listUser = user.findAll();
         List<Usuario> listUser = user.findSome(nombreusuario, contrasenia);
-        boolean bandera = false;
         Usuario tmp = new Usuario();
 
         for (Usuario tmpUser : listUser) {
             if (nombreusuario != null && nombreusuario.equals(tmpUser.getNombreusuario()) && contrasenia != null && contrasenia.equals(tmpUser.getContrasenia())) {
-                bandera = true;
                 tmp = tmpUser;
                 this.setNombre(tmp.getNombre());
                 this.setApellidos(tmp.getApellidos());
                 this.setCorreo(tmp.getCorreo());
                 return "index?faces-redirect=true";
-            } else {
-                bandera = false;
-            }
+            } 
 
         }
-        return "SignInIH?faces-redirect=true";
+              
+              
+          }catch (DataAccessLayerException e){
+              FacesContext.getCurrentInstance().addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_WARN, "Registro invalido", "Nombre de usuario ya exite en la base"));
+            
+          }
+        
+        return "SignInIH";
     }
 
     public String salir() {
