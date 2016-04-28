@@ -17,7 +17,7 @@ import org.hibernate.Transaction;
  */
 public class UsuarioDao extends AbstractDao{
     public Usuario Buscar(String nombreusuario) throws DataAccessLayerException{
-        return (Usuario)super.find(Usuario.class, nombreusuario) ;
+        return (Usuario)super.find(Usuario.class, nombreusuario,"nombreusuario") ;
     }
     public void Actualizar(Usuario o) throws DataAccessLayerException{
        super.update(o);

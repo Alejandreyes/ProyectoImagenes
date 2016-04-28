@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+    <body>
+
+        <ui:composition template="./Plantillas/Principal.xhtml">
+
+            <ui:define name="content">
+            <p:growl id="mensajes" showDetail="true" life="10000" />
+                
+                <h:form>
+            
+            <p:growl id="mensajes" showDetail="true" life="10000" />
+            <table id="consultarObjtbl">                
+                <tr>
+                  <td><h:outputText  value="Autor: " /></td>
+                  <td><h:outputText id="autor" value="#{mBObjeto.autor}" /></td>                   
+                </tr>                
+                <tr>
+                  <td><h:outputText  value="Edicion: " /></td>
+                  <td><h:outputText id="edicion" value="#{mBObjeto.edicion}" /></td>                   
+                </tr>
+                <tr>
+                  <td><h:outputText  value="Año: " /></td>
+                  <td><h:outputText id="anio" value="#{mBObjeto.anio}" /></td>                   
+                </tr>
+                <tr>
+                  <td><h:outputText  value="Genero: " /></td>
+                  <td><h:outputText id="genero" value="#{mBObjeto.genero}" /></td>                   
+                </tr>                
+                <tr>
+                  <td><h:outputText  value="Numero de Páginas: " /></td>
+                  <td><h:outputText id="numPaginas" value="#{mBObjeto.numPaginas}" /></td>                   
+                </tr>
+                <tr>
+                  <td><h:outputText  value="Nombre Usuario: " /></td>
+                  <td><h:outputText id="nombreUsusario" value="#{mBObjeto.nombreUsuario}" /></td>                   
+                </tr>  
+                <tr>
+                  <td><h:outputText  value="Sinopsis: " /></td>
+                  <td><h:outputText id="sinopsis" value="#{mBObjeto.sinopsis}" /></td>                   
+                </tr>
+            </table>      
+        </h:form>
+        <br/>
+        <br/>
+        
+        <h:form   rendered="#{aBCCPerfil.verificarSesion()}" >                
+            <h:inputHidden id="nombreLibro" value="#{mBObjeto.nombreLibro}" />
+            <p:commandButton id="Bajaobj" value="Baja Objeto"  action="#{mBObjeto.bajaObjeto()}" update=":mensajes" />             
+        </h:form>
+        <br/>
+        <h:form rendered="#{aBCCPerfil.verificarSesion()}">            
+            <h:inputHidden id="nombreLibro" value="#{mBPrestar.nombreObjeto}" />
+            <p:commandButton id="solicitarPrestamo" value="Solicitar Prestamo"  action="#{mBPrestar.solicitarPrestamo()}" update=":mensajes" />                                      
+        </h:form>
+        <br/>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Cambiar Objeto
+        </button>
+        
+                
+                
+                
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

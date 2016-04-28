@@ -24,7 +24,7 @@ import javax.faces.bean.RequestScoped;
 public class MBObjeto {
 
     @ManagedProperty(value="#{mBUsuario}")
-    MBUsuario mBUsuario;
+    private MBUsuario mBUsuario;
     String nombreLibro;
     String buscarLibro;
     String autor;
@@ -47,6 +47,8 @@ public class MBObjeto {
     public void setmBUsuario(MBUsuario mBUsuario) {
         this.mBUsuario = mBUsuario;
     }
+
+    
 
     public String getNombreLibro() {
         return nombreLibro;
@@ -154,7 +156,7 @@ public class MBObjeto {
         return "index?faces-redirect=true";
     }
     public String consultarObjeto(){
-        
+         Usuario us= new Usuario(mBUsuario.getNombreusuario(), mBUsuario.getContrasenia(), mBUsuario.getNombre(),mBUsuario.getApellidos(),mBUsuario.getCorreo() );
         ObjetoDao objd = new ObjetoDao();
         System.out.println(buscarLibro);
         Objeto obj = objd.Buscar(buscarLibro);

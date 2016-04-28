@@ -69,11 +69,13 @@ public abstract class AbstractDao {
         }
         return objects;
     }
-    protected Object find(Class clazz, String id) {
+    protected Object find(Class clazz, String id, String campo) {
         Object obj = null;
         try {
             startOperation();
-            obj = session.load(clazz, id);
+            Query query = session.createQuery("from " + clazz.getName() + " where "+campo+" = :code");
+            query.setParameter("code", id);
+            obj=query.uniqueResult();
             tx.commit();
         } catch (HibernateException e) {
             handleException(e);

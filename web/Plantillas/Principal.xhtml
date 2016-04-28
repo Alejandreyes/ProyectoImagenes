@@ -20,14 +20,13 @@
                 
                                <div id="cabeza">
                     
-                    #{mBUsuario.nombreusuario}
                 </div>
                 <div id="navBar">
                     <h:form rendered="#{!aBCCPerfil.verificarSesion()}">
                         <p:growl id="messages"/>
                         <p:menubar style="background: burlywood">
                             <f:facet  name="options">
-                                <p:inputText  placeholder="Buscar" value="#{MBObjeto.buscarLibro}" id="nombreLibroInput"
+                                <p:inputText  placeholder="Buscar" value="#{mBObjeto.buscarLibro}" id="nombreLibroInput"
                                               required="true" label="nombreLibro" />
                                 <p:commandButton id="AltaObjetobtn" value="Buscar"  
                                                  action="#{mBObjeto.consultarObjeto()}"  />
@@ -42,7 +41,7 @@
                         <p:growl id="messages"/>
                         <p:menubar style="background: burlywood">
                             <f:facet  name="options">
-                                <p:inputText  placeholder="Buscar" value="#{MBObjeto.buscarLibro}" id="nombreLibroInput"
+                                <p:inputText  placeholder="Buscar" value="#{mBObjeto.buscarLibro}" id="nombreLibroInput"
                                               required="true" label="nombreLibro" />
                                 <p:commandButton id="AltaObjetobtn" value="Buscar"  
                                                  action="#{mBObjeto.consultarObjeto()}"  />
