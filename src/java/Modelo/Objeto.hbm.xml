@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/04/2016 09:13:05 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Objeto" table="objeto" schema="public" optimistic-lock="version">
+        <id name="nombrelibro" type="string">
+            <column name="nombrelibro" length="30" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuario" class="Modelo.Usuario" fetch="select">
+            <column name="nombreusuario" length="15" not-null="true" />
+        </many-to-one>
+        <property name="autor" type="string">
+            <column name="autor" length="30" />
+        </property>
+        <property name="edicion" type="java.lang.Integer">
+            <column name="edicion" />
+        </property>
+        <property name="anio" type="java.lang.Integer">
+            <column name="anio" />
+        </property>
+        <property name="genero" type="string">
+            <column name="genero" length="15" />
+        </property>
+        <property name="sinopsis" type="string">
+            <column name="sinopsis" length="500" />
+        </property>
+        <property name="numpaginas" type="java.lang.Integer">
+            <column name="numpaginas" />
+        </property>
+        <set name="prestars" table="prestar" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nombrelibro" length="30" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Prestar" />
+        </set>
+    </class>
+</hibernate-mapping>

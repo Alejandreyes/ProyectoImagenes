@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+
+        <ui:composition template="./Plantillas/Principal.xhtml">
+
+            <ui:define name="content">
+                 <h:form> 
+                     <p:dataScroller  value="#{mBObjeto.getAllObjetos()}"  var="obj" chunkSize="3" >
+                <f:facet name="header">
+                    
+                    Objetos
+                </f:facet>
+
+                <h:panelGrid columns="2"  style="width:100%" columnClasses="logo,detail">
+                    <p:outputPanel>
+                       
+                        <p:panel id="basic" header="Libro"   style="margin-bottom:20px ">
+                            <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Nombre Libro:" />
+                            <h:outputText value= "#{obj.nombrelibro}" style="font-weight: bold"/>
+                                                       
+                            <h:outputText value="Autor:" />
+                            <h:outputText value="#{obj.autor}" style="font-weight: bold"/>
+                            
+                            <h:outputText value="Edicion:" />
+                            <h:outputText value="#{obj.edicion}" style="font-weight: bold"/>
+                            
+                            <h:outputText value="Año:" />
+                            <h:outputText value="#{obj.anio}" style="font-weight: bold"/>
+                            
+                            <h:outputText value="Genero:" />
+                            <h:outputText value="#{obj.genero}" style="font-weight: bold"/>
+
+                            <h:outputText value="Sinopsis:" />
+                            <h:outputText value="#{obj.sinopsis}" style="font-weight: bold"/>
+
+                            <h:outputText value="Numero de Páginas" />
+                            <h:outputText value="#{obj.numpaginas}" style="font-weight: bold"/>
+
+                            <h:outputText value="Nombre Usuario:" />
+                            <h:outputText value="#{obj.usuario.nombreusuario}" style="font-weight: bold"/>
+                            </h:panelGrid>
+                        </p:panel>
+                        
+                    </p:outputPanel>
+               
+                </h:panelGrid>
+            </p:dataScroller>
+        </h:form>
+            </ui:define>
+
+        </ui:composition>
+        
+        
+        
+    </body>
+</html>
+
+
