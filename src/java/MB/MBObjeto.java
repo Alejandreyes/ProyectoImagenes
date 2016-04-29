@@ -6,10 +6,14 @@
 package MB;
 
 import Controlador.dao.ObjetoDao;
+import Controlador.dao.PrestarDao;
 import Controlador.dao.UsuarioDao;
 import Modelo.Objeto;
+import Modelo.Prestar;
+import Modelo.PrestarId;
 import Modelo.Usuario;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -35,6 +39,7 @@ public class MBObjeto {
     Integer numPaginas;
     String nombreUsuario;
     String resultado;
+    private String usuarioIniciado;
     
     List<Objeto> objetos = new ArrayList<Objeto>();
     public MBObjeto() {
@@ -198,6 +203,52 @@ public class MBObjeto {
     public List<Objeto> getAllObjetos(){
         ObjetoDao dao=new ObjetoDao();
         return dao.obtenerTodos();
+    }
+    
+    public void solicitarPrestamo(){
+        System.out.println("aquiiiiiiiii " +nombreLibro);
+        ObjetoDao objd = new ObjetoDao();
+        Objeto obj = objd.Buscar(nombreLibro);
+
+        System.out.println("Objetooooo "+obj.getNombrelibro());
+        Date date = new Date();
+        Prestar prst = new Prestar();
+        PrestarDao prstd = new PrestarDao();
+        PrestarId psid = new PrestarId();
+        
+        UsuarioDao usdao = new UsuarioDao();
+        Usuario us1 = usdao.Buscar(mBUsuario.getNombreusuario()); //el de la sesion iniciada
+        
+        System.out.println("|----------|------------|--------|--"); 
+        System.out.println("nombUs: "+ us1.getNombreusuario() );
+        System.out.println("Usuario:"+obj.getUsuario().getNombreusuario());
+        System.out.println("NombLib"+obj.getNombrelibro());
+        
+        
+        psid.setNombreconsumidor(us1.getNombreusuario());
+        psid.setNombreprestador(obj.getUsuario().getNombreusuario());
+        psid.setNombrelibro(obj.getNombrelibro());
+        prst.setId(psid);
+        
+        prst.setUsuarioByNombreconsumidor(us1);
+        prst.setUsuarioByNombreprestador(obj.getUsuario());
+        prst.setFechaprestamo(date);
+        
+        prstd.Guardar(prst);
+    }
+
+    /**
+     * @return the usuarioIniciado
+     */
+    public String getUsuarioIniciado() {
+        return usuarioIniciado;
+    }
+
+    /**
+     * @param usuarioIniciado the usuarioIniciado to set
+     */
+    public void setUsuarioIniciado(String usuarioIniciado) {
+        this.usuarioIniciado = usuarioIniciado;
     }
     
 }

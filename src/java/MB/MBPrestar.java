@@ -7,6 +7,7 @@ package MB;
 
 import Controlador.dao.ObjetoDao;
 import Controlador.dao.PrestarDao;
+import Controlador.dao.UsuarioDao;
 import Modelo.Objeto;
 import Modelo.Prestar;
 import Modelo.PrestarId;
@@ -29,6 +30,7 @@ public class MBPrestar {
     private PrestarId id;
     private Objeto objeto;
     private String nombreObjeto;
+    private String nombreUsuario;
     private Usuario usuarioByNombreprestador;
     private Usuario usuarioByNombreconsumidor;
     private Date fechaprestamo;
@@ -120,24 +122,49 @@ public class MBPrestar {
     }
 
     public void solicitarPrestamo(){
+        System.out.println("aquiiiiiiiii " +nombreObjeto);
         ObjetoDao objd = new ObjetoDao();
         Objeto obj = objd.Buscar(nombreObjeto);
         objeto = obj;
+        System.out.println("Objetooooo "+objeto.getNombrelibro());
         Date date = new Date();
         Prestar prst = new Prestar();
         PrestarDao prstd = new PrestarDao();
         PrestarId psid = new PrestarId();
         
-        psid.setNombreconsumidor(us.getNombreusuario());
+        UsuarioDao usdao = new UsuarioDao();
+        Usuario us1 = usdao.Buscar(getNombreUsuario()); //el de la sesion iniciada
+        
+        System.out.println("|----------|------------|--------|--"); 
+        System.out.println("nombUs: "+ us1.getNombreusuario() );
+        System.out.println("Usuario:"+objeto.getUsuario().getNombreusuario());
+        System.out.println("NombLib"+objeto.getNombrelibro());
+        
+        
+        psid.setNombreconsumidor(getNombreUsuario());
         psid.setNombreprestador(objeto.getUsuario().getNombreusuario());
         psid.setNombrelibro(objeto.getNombrelibro());
         prst.setId(psid);
         
-        prst.setUsuarioByNombreconsumidor(us);
+        prst.setUsuarioByNombreconsumidor(us1);
         prst.setUsuarioByNombreprestador(obj.getUsuario());
         prst.setFechaprestamo(date);
         
         prstd.Guardar(prst);
+    }
+
+    /**
+     * @return the nombreUsuario
+     */
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    /**
+     * @param nombreUsuario the nombreUsuario to set
+     */
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
     
 }
