@@ -11,6 +11,9 @@ import Modelo.Usuario;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -106,5 +109,19 @@ public class ABCCPerfil {
     }
     public boolean verificarSesion(){
         return mBUsuario.getNombre() != null;
+    }
+    public String salir() {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        ExternalContext externalContext = context.getExternalContext();
+
+        Object session = externalContext.getSession(false);
+
+        HttpSession httpSession = (HttpSession) session;
+
+        httpSession.invalidate();
+
+        return "index?faces-redirect=true";
+
     }
 }
