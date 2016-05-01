@@ -161,7 +161,7 @@ public class MBObjeto {
         return "index?faces-redirect=true";
     }
     public String consultarObjeto(){
-         Usuario us= new Usuario(mBUsuario.getNombreusuario(), mBUsuario.getContrasenia(), mBUsuario.getNombre(),mBUsuario.getApellidos(),mBUsuario.getCorreo() );
+         //Usuario us= new Usuario(mBUsuario.getNombreusuario(), mBUsuario.getContrasenia(), mBUsuario.getNombre(),mBUsuario.getApellidos(),mBUsuario.getCorreo() );
         ObjetoDao objd = new ObjetoDao();
         System.out.println(buscarLibro);
         Objeto obj = objd.Buscar(buscarLibro);
