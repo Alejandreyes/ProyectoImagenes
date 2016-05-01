@@ -25,9 +25,10 @@ body {
     background: orangered;
     
 }
-#navegador {
+/*#navegador {
+    text-decoration:none;
     height: 30px;
-}
+}*/
 #contenido {
     float: left;
     width: 100%;
@@ -39,42 +40,78 @@ body {
     background: peru;
     width: 80%;
 }
-#contenido #secundario {
-    //height: 80px;    
-    max-height: 1100px;
-    min-height: 600px;
-    background: yellow;
-    float: left;
-    width: 20%;
+
+#secundario ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 150px;
 }
+
+#secundario li a {
+    display: block;
+    color: #000;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+#secundario li a:hover {
+    background-color: #555;
+    color: white;
+}
+
 
 #pie {
     height: 80px;
     background: firebrick;
-    height: 20px;
+    
     clear: both;
 }
+
+
+#navegador{   
+  padding: 10px 20px 30px;
+  
+  height: 30px;
+  text-align: end;
+  background: #555;
+}
 #navegador ul{
-   list-style-type: none;
-   text-align: end;
+    text-decoration:none;
+    text-align: left;
+  display: inline;
+  margin: 0;
+    //padding: 0;
+  //padding: 10px 4px 15px 0;
+  list-style-type:  none;
+  //-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  //-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  //box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  
 }
 #navegador li{
-   display: inline;
-   text-align: center;
-   margin: 0 10px 0 0;
-}
-#navegador li a {
-   padding: 2px 7px 2px 7px;
-   color: cadetblue;
-   background-color: #eeeeee;
-   border: 1px solid #ccc;
-   text-decoration: none;
-}
-#navegador li a:hover{
-   background-color: #333333;
-   color: #ffffff;
+   //font: bold 12px/18px sans-serif;
+   
+  display: inline-block;
+  margin-right: -4px;
+  //position: relative;
+  padding: 15px 30px;
+  background: whitesmoke;
+  cursor: pointer;
+  //-webkit-transition: all 0.2s;
+  //-moz-transition: all 0.2s;
+  //-ms-transition: all 0.2s;
+  //-o-transition: all 0.2s;
+  //transition: all 0.2s;
 }
 
+#navegador ul :hover{
+   background: #555;
+  color: #FFC;
+}
+A:link {text-decoration:none}
+A:visited {text-decoration:none}
 
 #menuList {
   margin: 0px;
@@ -106,3 +143,19 @@ body {
   color: #FFC
 C00;
 }
+#navegador #navegadorBusqueda{
+    text-align: start;
+    float: left;
+    width: 50%;
+}
+
+#navegador #navegadorBotones{
+    float: left;
+    width: 50%;
+}
+
+link {
+    font-size: 15px;
+}
+
+
