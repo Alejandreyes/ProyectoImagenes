@@ -185,7 +185,7 @@ public class MBObjeto {
         System.out.println("sisisisisi");
         return "index.xhtml";
     }
-    public void cambiarObjeto(){
+    public String cambiarObjeto(){
         System.out.println("-.-.-.-243-4-->"+nombreLibro);
         Objeto obj;
         ObjetoDao objd = new ObjetoDao();
@@ -198,6 +198,7 @@ public class MBObjeto {
         obj.setSinopsis(sinopsis);
         obj.setNumpaginas(numPaginas);
         objd.Actualizar(obj);
+        return "index.xhtml";
     }
     public List<Objeto> getAllObjetos(){
         ObjetoDao dao=new ObjetoDao();
