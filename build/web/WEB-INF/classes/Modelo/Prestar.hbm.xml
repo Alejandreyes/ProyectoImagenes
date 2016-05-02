@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/04/2016 09:13:05 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Prestar" table="prestar" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="Modelo.PrestarId">
+            <key-property name="nombreprestador" type="string">
+                <column name="nombreprestador" length="15" />
+            </key-property>
+            <key-property name="nombreconsumidor" type="string">
+                <column name="nombreconsumidor" length="15" />
+            </key-property>
+            <key-property name="nombrelibro" type="string">
+                <column name="nombrelibro" length="30" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="objeto" class="Modelo.Objeto" update="false" insert="false" fetch="select">
+            <column name="nombrelibro" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarioByNombreprestador" class="Modelo.Usuario" update="false" insert="false" fetch="select">
+            <column name="nombreprestador" length="15" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarioByNombreconsumidor" class="Modelo.Usuario" update="false" insert="false" fetch="select">
+            <column name="nombreconsumidor" length="15" not-null="true" />
+        </many-to-one>
+        <property name="fechaprestamo" type="date">
+            <column name="fechaprestamo" length="13" />
+        </property>
+        <property name="calificacionprestador" type="java.lang.Integer">
+            <column name="calificacionprestador" />
+        </property>
+        <property name="calificaconsumidor" type="java.lang.Integer">
+            <column name="calificaconsumidor" />
+        </property>
+    </class>
+</hibernate-mapping>

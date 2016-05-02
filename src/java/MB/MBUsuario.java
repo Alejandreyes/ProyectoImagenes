@@ -89,7 +89,7 @@ public class MBUsuario {
               
               
           }catch (DataAccessLayerException e){
-              FacesContext.getCurrentInstance().addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_WARN, "Registro invalido", "Nombre de usuario ya exite en la base"));
+              FacesContext.getCurrentInstance().addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_WARN, "Registro invalido", "Nombre de usuario o contraseña incorrectos"));
             
           }
         
