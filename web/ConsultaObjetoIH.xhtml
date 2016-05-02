@@ -13,10 +13,11 @@
             <ui:define name="content">
             <p:growl id="mensajes" showDetail="true" life="10000" />
                 
-                <h:form>
-            
+        <h:form>            
             <p:growl id="mensajes" showDetail="true" life="10000" />
-            <table id="consultarObjtbl">                
+             <h2>#{mBObjeto.nombreLibro}</h2>
+
+             <table id="consultarObjtbl" style="margin: 0 45%;">                
                 <tr>
                   <td><h:outputText  value="Autor: " /></td>
                   <td><h:outputText id="autor" value="#{mBObjeto.autor}" /></td>                   
@@ -48,33 +49,43 @@
             </table>      
         </h:form>
         <br/>
+        <h:form   rendered="#{aBCCPerfil.mBUsuario.nombreusuario == mBObjeto.nombreUsuario}"  >
+            <h:inputHidden id="nombreLibro" value="#{mBObjeto.nombreLibro}" />
+            <p:commandButton id="Bajaobj" value="Baja Objeto"  action="#{mBObjeto.bajaObjeto()}" update=":mensajes" />             
+        </h:form>
         <br/>
-        <h:panelGroup rendered="#{aBCCPerfil.mBUsuario.nombreusuario == mBObjeto.nombreLibro}">
-            <div class="text-success">
-                <h:form   rendered="#{aBCCPerfil.verificarSesion()}"  >                
-                    <h:outputText id="nombreLibro" value="#{mBObjeto.nombreLibro}" />
-                    <p:commandButton id="Bajaobj" value="Baja Objeto"  action="#{mBObjeto.bajaObjeto()}" update=":mensajes" />             
-                </h:form>
-            </div>
-        </h:panelGroup>
-        
-        
+          
+        <h:form rendered="#{aBCCPerfil.mBUsuario.nombreusuario == mBObjeto.nombreUsuario}">
+            <br/>
+            <h:outputText  value="Nombre Libro: " />
+            <p:inputText id="nombreLibro" placeholder="#{mBObjeto.nombreLibro}" value="#{mBObjeto.nombreLibro}"/>
+            <br/>
+            <h:outputText  value="Autor: " />
+            <p:inputText id="autor" value="#{mBObjeto.autor}"/>
+            <br/>
+            <h:outputText  value="Edicion: " />
+            <p:inputText id="edicion" value="#{mBObjeto.edicion}" />
+            <br/>   
+            <h:outputText  value="Año: " />
+            <p:inputText id="anio" value="#{mBObjeto.anio}" />
+            <br/>
+            <h:outputText  value="Genero: " />
+            <p:inputText id="genero" value="#{mBObjeto.genero}" />
+            <br/>
+            <h:outputText  value="Sinopsis: " />
+            <p:inputText id="sinopsis" value="#{mBObjeto.sinopsis}" />
+            <br/>
+            <h:outputText  value="Numero de Páginas: " />
+            <p:inputText id="numPaginas" value="#{mBObjeto.numPaginas}" />
+            <br/>                    
+            <p:commandButton id="AltaObjetobtn" value="Cambiar Objeto"  action="#{mBObjeto.cambiarObjeto()}" update=":mensajes" />
+        </h:form>
         <br/>
         <h:form rendered="#{aBCCPerfil.verificarSesion()}">
             <h:inputHidden id="nombreLibro" value="#{mBObjeto.nombreLibro}" />
             <p:commandButton id="solicitarPrestamo" value="Solicitar Prestamo"  action="#{mBObjeto.solicitarPrestamo()}" update=":mensajes" />                                      
         </h:form>
-        <br/>
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            Cambiar Objeto
-        </button>
-        
-                
-                
-                
-                
-            </ui:define>
-
+        </ui:define>
         </ui:composition>
 
     </body>

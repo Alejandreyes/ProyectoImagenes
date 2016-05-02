@@ -23,7 +23,7 @@ import javax.faces.bean.RequestScoped;
  *
  * @author Stein
  */
-@ManagedBean
+@ManagedBean(name="mBObjeto")
 @RequestScoped
 public class MBObjeto {
 
@@ -52,8 +52,6 @@ public class MBObjeto {
     public void setmBUsuario(MBUsuario mBUsuario) {
         this.mBUsuario = mBUsuario;
     }
-
-    
 
     public String getNombreLibro() {
         return nombreLibro;
@@ -163,7 +161,7 @@ public class MBObjeto {
     public String consultarObjeto(){
          //Usuario us= new Usuario(mBUsuario.getNombreusuario(), mBUsuario.getContrasenia(), mBUsuario.getNombre(),mBUsuario.getApellidos(),mBUsuario.getCorreo() );
         ObjetoDao objd = new ObjetoDao();
-        System.out.println(buscarLibro);
+        //System.out.println(buscarLibro);
         Objeto obj = objd.Buscar(buscarLibro);
         
         nombreLibro = obj.getNombrelibro();
@@ -175,15 +173,16 @@ public class MBObjeto {
         numPaginas = obj.getNumpaginas();
         nombreUsuario = obj.getUsuario().getNombreusuario();
         //nombreLibro = obj.getNombrelibro();
-        System.out.println(obj);
+        //System.out.println(obj);
         return "ConsultaObjetoIH.xhtml";
     }
     public String bajaObjeto(){
-        System.out.println("-------------->"+nombreLibro);
+        System.out.println("-------------->");
         Objeto obj;// = new Objeto();
         ObjetoDao objd = new ObjetoDao();
         obj = objd.Buscar(nombreLibro);
         objd.Eliminar(obj);
+        System.out.println("sisisisisi");
         return "index.xhtml";
     }
     public void cambiarObjeto(){
@@ -205,7 +204,7 @@ public class MBObjeto {
         return dao.obtenerTodos();
     }
     
-    public void solicitarPrestamo(){
+    public String solicitarPrestamo(){
         System.out.println("aquiiiiiiiii " +nombreLibro);
         ObjetoDao objd = new ObjetoDao();
         Objeto obj = objd.Buscar(nombreLibro);
@@ -219,7 +218,7 @@ public class MBObjeto {
         UsuarioDao usdao = new UsuarioDao();
         Usuario us1 = usdao.Buscar(mBUsuario.getNombreusuario()); //el de la sesion iniciada
         
-        System.out.println("|----------|------------|--------|--"); 
+        //System.out.println("|----------|------------|--------|--"); 
         System.out.println("nombUs: "+ us1.getNombreusuario() );
         System.out.println("Usuario:"+obj.getUsuario().getNombreusuario());
         System.out.println("NombLib"+obj.getNombrelibro());
@@ -235,6 +234,7 @@ public class MBObjeto {
         prst.setFechaprestamo(date);
         
         prstd.Guardar(prst);
+        return "SolicitarPrestamoIH.xhtml";
     }
 
     /**
