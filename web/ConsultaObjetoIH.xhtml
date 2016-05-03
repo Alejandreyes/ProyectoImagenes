@@ -57,8 +57,8 @@
           
         <h:form rendered="#{aBCCPerfil.mBUsuario.nombreusuario == mBObjeto.nombreUsuario}">
             <br/>
-            <h:outputText  value="Nombre Libro: " />
-            <h:outputText id="nombreLibro" value="#{mBObjeto.nombreLibro}"/>
+            
+            <h:inputHidden id="nombreLibro" value="#{mBObjeto.nombreLibro}"/>
             <br/>
             <h:outputText  value="Autor: " />
             <p:inputText id="autor" value="#{mBObjeto.autor}"/>

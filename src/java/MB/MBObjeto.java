@@ -251,5 +251,8 @@ public class MBObjeto {
     public void setUsuarioIniciado(String usuarioIniciado) {
         this.usuarioIniciado = usuarioIniciado;
     }
+    public void eliminaPrestamos(){
+        
+    }
     
 }
