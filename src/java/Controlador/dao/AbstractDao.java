@@ -73,8 +73,8 @@ public abstract class AbstractDao {
         Object obj = null;
         try {
             startOperation();
-            Query query = session.createQuery("from " + clazz.getName() + " where "+campo+" = :code");
-            query.setParameter("code", id);
+            Query query = session.createQuery("from " + clazz.getName() + " where "+campo+" like \'%"+id+"%\'");
+            //query.setParameter("code", id);
             obj=query.uniqueResult();
             tx.commit();
         } catch (HibernateException e) {

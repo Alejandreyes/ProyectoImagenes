@@ -5,8 +5,10 @@
  */
 package Controlador.dao;
 
+import Modelo.Objeto;
 import Modelo.Prestar;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Transaction;
 
 /**
@@ -40,6 +42,20 @@ public class PrestarDao extends AbstractDao{
     }
     public List<Prestar>obtenerTodos(){
         return super.findAll(Prestar.class);
+    }
+    public  boolean disponible(Objeto obj){
+        Boolean disponible = false;
+        super.startOperation();
+        try {
+            Query d = session.createQuery("from "+"Prestar"+" where "+"nombrelibro"+" like \'" +obj.getNombrelibro()+"\'");
+            disponible = (d.list().isEmpty());
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return disponible;
     }
     
 }

@@ -15,7 +15,11 @@
                 
         <h:form>            
             <p:growl id="mensajes" showDetail="true" life="10000" />
-             <h2>#{mBObjeto.nombreLibro}</h2>
+            <p:graphicImage cache="false" height="200" id="dimage" title="mi foto" value="#{mBObjeto.graphicImage}" width="200">
+                </p:graphicImage>
+
+     
+            <h2>#{mBObjeto.nombreLibro}</h2>
 
              <table id="consultarObjtbl" style="margin: 0 35%;">                
                 <tr>

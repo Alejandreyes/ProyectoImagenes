@@ -9,15 +9,27 @@ import Controlador.dao.ObjetoDao;
 import Controlador.dao.PrestarDao;
 import Controlador.dao.UsuarioDao;
 import Modelo.Objeto;
+import Modelo.ObjetoImagen;
 import Modelo.Prestar;
 import Modelo.PrestarId;
 import Modelo.Usuario;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -40,6 +52,20 @@ public class MBObjeto {
     String nombreUsuario;
     String resultado;
     private String usuarioIniciado;
+     private StreamedContent graphicImage;
+
+    /*public StreamedContent getGraphicImage() {
+         try {
+            prepararImagen();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MBImagen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return graphicImage;
+    }*/
+
+   /* public void setGraphicImage(StreamedContent graphicImage) {
+        this.graphicImage = graphicImage;
+    }*/
     
     List<Objeto> objetos = new ArrayList<Objeto>();
     public MBObjeto() {
@@ -253,6 +279,70 @@ public class MBObjeto {
     }
     public void eliminaPrestamos(){
         
+    }
+    public String prestado(Objeto obj){
+        PrestarDao da=new PrestarDao();
+        return (da.disponible(obj))? "Disponible" : "Prestado" ;
+    }
+    public String consultarObjeto(Objeto obj){
+        nombreLibro = obj.getNombrelibro();
+        autor = obj.getAutor();
+        edicion = obj.getEdicion();
+        anio = obj.getAnio();
+        genero = obj.getGenero();
+        sinopsis = obj.getSinopsis();
+        numPaginas = obj.getNumpaginas();
+        nombreUsuario = obj.getUsuario().getNombreusuario();
+        return "ConsultaObjetoIH.xhtml";
+    }
+
+   /* private void prepararImagen() throws FileNotFoundException {
+        try {
+            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            String realPath = (String) servletContext.getRealPath("/");
+            System.out.println(realPath);
+            Path f = Paths.get(realPath);
+            System.out.println(f.subpath(0, f.getNameCount() - 2));
+
+            //realPath = f.getRoot().toString() + f.subpath(0, f.getNameCount() - 2) + "/Imagenes/FotosLibros/"+nombreLibro+".jpg";
+            System.out.println("-----------------------------------------------------------");
+            System.out.println(realPath);
+            graphicImage = new DefaultStreamedContent(new FileInputStream(realPath));
+        } catch (Exception e) {
+            String path = "C:\\Users\\Stein\\Documents\\NetBeansProjects\\IngenieriaDeSoftware\\SegundaIteracion\\Proyecto\\Imagenes\\FotosLibros\\comodin.jpg";
+            
+                graphicImage = new DefaultStreamedContent(new FileInputStream(path));
+            
+        }
+    }*/
+     public void prepareImage(){
+
+         String path = "C:\\Users\\Stein\\Documents\\NetBeansProjects\\IngenieriaDeSoftware\\SegundaIteracion\\Proyecto\\Imagenes\\FotosLibros\\comodin.jpg";
+            
+         try {
+            graphicImage = new DefaultStreamedContent(new FileInputStream(path), "image/png");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MBObjeto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  }
+
+  public StreamedContent getGraphicImage() {
+      prepareImage();
+        return graphicImage;
+    }
+
+    public void setGraphicImage(StreamedContent graphicImage) {
+        this.graphicImage = graphicImage;
+    }
+
+    public List<ObjetoImagen> getAllObjetosImagen(){
+        ObjetoDao dao=new ObjetoDao();
+        List<Objeto> lista = dao.obtenerTodos();
+        List<ObjetoImagen> objIma=new LinkedList<>();
+        for (Objeto obj : lista) {
+            objIma.add(new ObjetoImagen(obj));
+        }
+        return objIma;
     }
     
 }

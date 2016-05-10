@@ -10,48 +10,30 @@
         <ui:composition template="./Plantillas/Principal.xhtml">
 
             <ui:define name="content">
-                 <h:form> 
-                     <p:dataScroller  value="#{mBObjeto.getAllObjetos()}"  var="obj" chunkSize="3" >
-                <f:facet name="header">
-                    
-                    Objetos
-                </f:facet>
-
-                <h:panelGrid columns="2"  style="width:100%" columnClasses="logo,detail">
-                    <p:outputPanel>
-                       
-                        <p:panel id="basic" header="Libro"   style="margin-bottom:20px ">
-                            <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Nombre Libro:" />
-                            <h:outputText value= "#{obj.nombrelibro}" style="font-weight: bold"/>
-                                                       
-                            <h:outputText value="Autor:" />
-                            <h:outputText value="#{obj.autor}" style="font-weight: bold"/>
-                            
-                            <h:outputText value="Edicion:" />
-                            <h:outputText value="#{obj.edicion}" style="font-weight: bold"/>
-                            
-                            <h:outputText value="Año:" />
-                            <h:outputText value="#{obj.anio}" style="font-weight: bold"/>
-                            
-                            <h:outputText value="Genero:" />
-                            <h:outputText value="#{obj.genero}" style="font-weight: bold"/>
-
-                            <h:outputText value="Sinopsis:" />
-                            <h:outputText value="#{obj.sinopsis}" style="font-weight: bold"/>
-
-                            <h:outputText value="Numero de Páginas" />
-                            <h:outputText value="#{obj.numpaginas}" style="font-weight: bold"/>
-
-                            <h:outputText value="Nombre Usuario:" />
-                            <h:outputText value="#{obj.usuario.nombreusuario}" style="font-weight: bold"/>
-                            </h:panelGrid>
-                        </p:panel>
-                        
-                    </p:outputPanel>
+                 
+                     
+                     
+                     <h:form id="form" >
+                         <p:dataGrid  var="obj"  paginator="true" columns="3" 
+                                      rows="0" columns="3" value="#{mBObjeto.getAllObjetosImagen()}"   >
+        <f:facet name="header">
+            Libros
+        </f:facet>
+               <p:panel   header="Titulo: #{obj.nombrelibro}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+                <p:graphicImage value="#{obj.image1}"/>
                
-                </h:panelGrid>
-            </p:dataScroller>
+                <h:outputText value="Genero: #{obj.genero}" />
+                <h:outputText value="Sinopsis: #{obj.sinopsis}" />
+                <h:outputLabel value="Estado: #{mBObjeto.prestado(obj)}"/>
+                <p:commandLink action="#{mBObjeto.consultarObjeto(obj)}">
+                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;size: 13px" />
+                </p:commandLink>
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+
         </h:form>
             </ui:define>
 
